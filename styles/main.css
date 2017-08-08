@@ -52,3 +52,13 @@ html {
      position: relative; /* positioning will be explained in a resource */
      left: 2rem;
  }
+
+ .clearfix::before,
+ .clearfix::after {
+   content: " ";
+   display: table;
+}
+
+ .clearfix::after {
+   clear: both;
+}
