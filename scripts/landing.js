@@ -12,7 +12,7 @@ var animatePoints = function(points) {
 };
 
 window.onload = function() {
-  vaar sellingPoints = document.getElementsByClassName('seeling-points')[0];
+  var sellingPoints = document.getElementsByClassName('seeling-points')[0];
 
   window.addEventListener('scroll', function(event) {
      console.log("Current offset from the top is " + seelingPoints.getBoundingClientRect().top + " pixels");
