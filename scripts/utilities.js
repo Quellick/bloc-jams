@@ -1,9 +1,22 @@
 var forEach = function (array, callback) {
   for (var i = 0; i < array.length; i++){
+<<<<<<< HEAD
     callback(array[i]);
   }
 }
 
+=======
+    callback();
+  }
+  function callback(){
+    animatePoints();
+  }
+}
+
+
+
+
+>>>>>>> checkpoint-10-dom-scripting-collection-view
 /*
 var pointsArray = document.getElementsByClassName('point');
 
