@@ -1,14 +1,8 @@
 var forEach = function (array, callback) {
   for (var i = 0; i < array.length; i++){
-    callback();
-  }
-  function callback(){
-    animatePoints();
+    callback(array[i]);
   }
 }
-
-
-
 
 /*
 var pointsArray = document.getElementsByClassName('point');
