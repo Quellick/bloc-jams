@@ -29,6 +29,22 @@
          { title: 'Wrong phone number', duration: '2:15'}
      ]
  };
+ var albumTucker = {
+     title: 'The Frustrated',
+     artist: 'Tucker Platt',
+     label: 'Large',
+     year: '1977',
+     albumArtUrl: 'assets/images/album_covers/20.png',
+     songs: [
+         { title: 'Hello, Anyone there?', duration: '1:01' },
+         { title: 'Row, row, row', duration: '5:01' },
+         { title: 'To big to fit', duration: '3:21'},
+         { title: 'I cant hear you', duration: '3:14' },
+         { title: 'This is it', duration: '2:15'}
+     ]
+ };
+
+albumArtUrl.addEventListener(click, ?Listener?)
 
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
