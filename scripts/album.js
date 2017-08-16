@@ -63,16 +63,16 @@
  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
  var setCurrentAlbum = function(album) {
-     // #2
+     // Assign values to each part of the album (text, images)
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
 
-     // #3
+     // Clear contents of album song list container
      albumSongList.innerHTML = '';
 
-     // #4
+     // Build list of songs from album JavaScript object
      for (var i = 0; i < album.songs.length; i++) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
@@ -84,7 +84,7 @@
      var albums = [albumPicasso, albumMarconi, albumTucker];
      var index = 1;
      albumImage.addEventListener("click", function(event)){
-        setCurrentAlbum(album[index]);
+        setCurrentAlbum(albums[index]);
         index++;
         if (index == albums.length) {
           index = 0;
