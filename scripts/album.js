@@ -78,16 +78,16 @@
      }
  };
 
+ var albums = [albumPicasso, albumMarconi, albumTucker];
+ var index = 1;
+ albumImage.addEventListener("click", function(event)){
+    setCurrentAlbum(albums[index]);
+    index++;
+    if (index == albums.length) {
+      index = 0;
+    }
+ });
+
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
-
-     var albums = [albumPicasso, albumMarconi, albumTucker];
-     var index = 1;
-     albumImage.addEventListener("click", function(event)){
-        setCurrentAlbum(albums[index]);
-        index++;
-        if (index == albums.length) {
-          index = 0;
-        }
-     });
  };
