@@ -64,10 +64,68 @@
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
+/*
+var findParentByClassName = function (el, sin){
+    while ((el = el.parentElement) && !el.classList.contains(sin));
+    return(sin);
+}
+*/
+
+var findParentByClassName = function(element, targetClass) {
+    if (element) {
+        var currentParent = element.parentElement;
+        while (currentParent.className !== targetClass && currentParent.className !== null) {
+            currentParent = currentParent.parentElement;
+        }
+        return currentParent;
+    }
+};
+
+var getSongItem = function (element){
+  switch(element.className) {
+    case 1:'album-song-button':
+         // code
+    case 2:'ion-play':
+         // code
+    case 3:'ion-pause':
+         return findParentByClassName(element, 'song-item-number');
+    case 4: 'album-view-song-item':
+         return element.querySelector('.song-item-number');
+    case 5: 'song-item-title':
+    case 6: 'song-item-duration':
+         return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
+    case 7: 'song-item-number':
+         return element;
+    default:
+         return;
+  }
+}
+
+var clickHandler = function(targetElement) {
+
+    var songItem = getSongItem(targetElement);
+    if (currentlyPlayingSong === null) {
+        songItem.innerHTML = pauseButtonTemplate;
+        currentlyPlayingSong = songItem.getAttribute('data-song-number');
+      } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
+          songItem.innerHTML = playButtonTemplate;
+          currentlyPlayingSong = null;
+        } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
+          var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
+          currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
+          songItem.innerHTML = pauseButtonTemplate;
+          currentlyPlayingSong = songItem.getAttribute('data-song-number');
+      }
+};
+
+ // Elements to which we'll be adding listeners
  var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
  var songRows = document.getElementsByClassName('album-view-song-item');
  // Album button templates
  var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+ var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+
+ var currentlyPlayingSong = null;
 
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
@@ -86,6 +144,9 @@
              // Revert the content back to the number
              this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
              // Selects first child element, which is the song-item-number element
+         });
+         songRows[i].addEventListener('click', function(event) {
+             clickHandler(event.target);
          });
      }
  };
