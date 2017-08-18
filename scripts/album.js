@@ -83,23 +83,23 @@ var findParentByClassName = function(element, targetClass) {
 
 var getSongItem = function (element){
   switch(element.className) {
-    case 1:'album-song-button':
-         // code
-    case 2:'ion-play':
-         // code
-    case 3:'ion-pause':
+    case 'album-song-button':
+
+    case 'ion-play':
+
+    case 'ion-pause':
          return findParentByClassName(element, 'song-item-number');
-    case 4: 'album-view-song-item':
+    case 'album-view-song-item':
          return element.querySelector('.song-item-number');
-    case 5: 'song-item-title':
-    case 6: 'song-item-duration':
+    case 'song-item-title':
+    case 'song-item-duration':
          return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
-    case 7: 'song-item-number':
+    case 'song-item-number':
          return element;
     default:
          return;
   }
-}
+};
 
 var clickHandler = function(targetElement) {
 
@@ -133,20 +133,27 @@ var clickHandler = function(targetElement) {
      songListContainer.addEventListener('mouseover', function(event) {
          // #1
          // Only target individual song rows during event delegation
+
           if (event.target.parentElement.className === 'album-view-song-item') {
-              // Change the content from the number to the play button's HTML
-               event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+              var songItem = getSongItem(event.target);
+              if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
+                 songItem.innerHTML = playButtonTemplate;
+             }
           }
      });
 
      for (var i = 0; i < songRows.length; i++) {
          songRows[i].addEventListener('mouseleave', function(event) {
-             // Revert the content back to the number
-             this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
-             // Selects first child element, which is the song-item-number element
+             //#1
+             var songItem = getSongItem(event.target);
+             var songItemNumber = songItem.getAttribute('data-song-number');
+             //#2
+             if (songItemNumber !== currentlyPlayingSong) {
+                songItem.innerHTML = songItemNumber;
+            }
          });
          songRows[i].addEventListener('click', function(event) {
              clickHandler(event.target);
          });
      }
- };
+};
