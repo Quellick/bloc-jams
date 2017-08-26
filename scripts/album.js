@@ -74,7 +74,7 @@
        var $songnumberCell = $(this).find(".song-item-number")
        var songnumber = parseInt($songnumberCell.attr("data-song-number"));
        if(songnumber !== currentlyPlayingSong){
-         $songnumberCell.html(pauseButtonTemplate);
+         $songnumberCell.html(songnumber);
        }
      };
 
