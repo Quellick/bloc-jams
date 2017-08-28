@@ -67,7 +67,6 @@
        if(songnumber !== currentlyPlayingSong){
          $songnumberCell.html(playButtonTemplate);
        }
-
      };
 
      var offHover = function(event){
@@ -78,7 +77,7 @@
        }
      };
 
-     $row.find('song-item-number').click(clickHandler);
+     $row.find('.song-item-number').click(clickHandler);
      $row.hover(onHover, offHover);
      return $row;
  };
