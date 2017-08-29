@@ -10,7 +10,7 @@
      var $row = $(template);
 
      var clickHandler = function(){
-       var songNumber = $(this).attr('data-song-number');
+       var songNumber = parseInt($(this).attr('data-song-number'));
 
        if (currentlyPlayingSongNumber !== null) {
        // Revert to song number for currently playing song because user started playing new song.
@@ -34,7 +34,7 @@
 
      var onHover = function(event){
        var $songNumberCell = $(this).find(".song-item-number")
-       var songNumber = $songNumberCell.attr("data-song-number");
+       var songNumber = parseInt($(this).attr('data-song-number'));
        //check to see if song is playing
        if(songNumber !== currentlyPlayingSongNumber){
          $songNumberCell.html(playButtonTemplate);
@@ -43,9 +43,10 @@
 
      var offHover = function(event){
        var $songNumberCell = $(this).find(".song-item-number")
-       var songNumber = $songNumberCell.attr("data-song-number");
+       var songNumber = parseInt($(this).attr('data-song-number'));
        if(songNumber !== currentlyPlayingSongNumber){
          $songNumberCell.html(songNumber);
+         console.log("songNumber type is " + typeof songNumber + "\n and currentlyPlayingSongNumber type is " + typeof currentlyPlayingSongNumber);
        }
      };
 
@@ -86,6 +87,7 @@ var nextSong = function(){
   //what is current song
   var currentSong = trackIndex(currentAlbum, currentSongFromAlbum);
   //if current song is last song in list wrap to first
+  currentSong++;
   if (currentSong >= currentAlbum.songs.length){
      currentSong = 0;
   }
@@ -110,13 +112,14 @@ var previousSong = function(){
   //what is current song
   var currentSong = trackIndex(currentAlbum, currentSongFromAlbum);
   //if current song is first song wrap to the last song
+  currentSong--;
   if (currentSong < 0) {
     currentSong = currentAlbum.songs.length - 1;
   }
   //save last song number
   var lastSongNumber = currentlyPlayingSongNumber;
   //set new current song
-  currentlyPlayingSongNumber = currentSong - 1;
+  currentlyPlayingSongNumber = currentSong + 1;
   currentSongFromAlbum = currentAlbum.song[currentSong];
   //updatePlayerBarSong to current song
   updatePlayerBarSong();
