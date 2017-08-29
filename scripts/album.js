@@ -31,7 +31,7 @@
 
      var onHover = function(event){
        var $songNumberCell = $(this).find(".song-item-number")
-       var songNumber = parseInt($(this).attr('data-song-number'));
+       var songNumber = parseInt($songNumberCell.attr('data-song-number'));
 
        if(songNumber !== currentlyPlayingSongNumber){
          $songNumberCell.html(playButtonTemplate);
@@ -40,7 +40,7 @@
 
      var offHover = function(event){
        var $songNumberCell = $(this).find(".song-item-number")
-       var songNumber = parseInt($(this).attr('data-song-number'));
+       var songNumber = parseInt($songNumberCell.attr('data-song-number'));
 
        if(songNumber !== currentlyPlayingSongNumber){
          $songNumberCell.html(songNumber);
@@ -51,7 +51,7 @@
      $row.find('.song-item-number').click(clickHandler);
      $row.hover(onHover, offHover);
      return $row;
- };
+  };
 
  var setCurrentAlbum = function(album) {
      currentAlbum = album;
@@ -90,12 +90,12 @@ var nextSong = function(){
    var lastSongNumber = currentlyPlayingSongNumber;
   //set new current song
     currentlyPlayingSongNumber = currentSong + 1;
-    currentSongFromAlbum = currentAlbum.song[currentSong];
+    currentSongFromAlbum = currentAlbum.songs[currentSong];
   //updatePlayerBarSong to current song
     updatePlayerBarSong();
 
-    var $nextSongCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
-    var $lastSongCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
+    var $nextSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+    var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
   //update previous song .song-item-number to a number
   //update the new song .song-item-number to a pause button
     $nextSongNumberCell.html(pauseButtonTemplate);
@@ -115,7 +115,7 @@ var previousSong = function(){
   var lastSongNumber = currentlyPlayingSongNumber;
   //set new current song
   currentlyPlayingSongNumber = currentSong + 1;
-  currentSongFromAlbum = currentAlbum.song[currentSong];
+  currentSongFromAlbum = currentAlbum.songs[currentSong];
   //updatePlayerBarSong to current song
   updatePlayerBarSong();
   //WHy is this different than the nextSong??
