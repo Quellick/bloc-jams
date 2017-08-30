@@ -99,8 +99,7 @@ var nextSong = function(){
     currentSongFromAlbum = currentAlbum.songs[currentSong];
   //updatePlayerBarSong to current song
     updatePlayerBarSong();
-
-    var $nextSongNumberCell = getSongNumberCell(setSong(songNumber););
+    var $nextSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
     var $lastSongNumberCell = $('.song-item-number[data-song-number="' + lastSongNumber + '"]');
   //update previous song .song-item-number to a number
   //update the new song .song-item-number to a pause button
