@@ -1,7 +1,23 @@
 var setSong = function(songNumber){
+  if (currentSoundFile) {
+        currentSoundFile.stop();
+    }
    currentlyPlayingSongNumber = parseInt(songNumber);
    currentSongFromAlbum = currentAlbum.songs[songNumber -1];
+   //#1
+   currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
+     //#2
+     formats: ['mp3'],
+     preload: true
+   });
+     setVolume(currentVolume);
   };
+
+  var setVolume = function(volume) {
+     if (currentSoundFile) {
+         currentSoundFile.setVolume(volume);
+     }
+ };
 
 var getSongNumberCell = function(number){
        return $('.song-item-number[data-song-number="' + number + '"]');
@@ -28,11 +44,18 @@ var getSongNumberCell = function(number){
        if (currentlyPlayingSongNumber !== songNumber) {
        $(this).html(pauseButtonTemplate);
        setSong(songNumber);
+       currentSoundFile.play();
        updatePlayerBarSong();
      } else if (currentlyPlayingSongNumber === songNumber) {
-       $(this).html(playButtonTemplate);
-       $('.main-controls .play-pause').html(playerBarPlayButton);
-       setSong(songNumber);
+               if (currentSoundFile.isPaused()) {
+ +                $(this).html(pauseButtonTemplate);
+ +                $('.main-controls .play-pause').html(playerBarPauseButton);
+ +                currentSoundFile.play();
+ +            } else {
+ +                $(this).html(playButtonTemplate);
+ +                $('.main-controls .play-pause').html(playerBarPlayButton);
+ +                currentSoundFile.pause();
+ +            }
      }
     };
 
@@ -95,8 +118,8 @@ var nextSong = function(){
   //save last song number
    var lastSongNumber = currentlyPlayingSongNumber;
   //set new current song
-    currentlyPlayingSongNumber = currentSong + 1;
-    currentSongFromAlbum = currentAlbum.songs[currentSong];
+  setSong(songNumber);
+  currentSoundFile.play();
   //updatePlayerBarSong to current song
     updatePlayerBarSong();
     var $nextSongNumberCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
@@ -120,6 +143,7 @@ var previousSong = function(){
   var lastSongNumber = currentlyPlayingSongNumber;
   //set new current song
   setSong(songNumber);
+  currentSoundFile.play();
   //updatePlayerBarSong to current song
   updatePlayerBarSong();
   //WHy is this different than the nextSong??
@@ -149,6 +173,8 @@ var updatePlayerBarSong = function() {
  var $previousButton = $('.main-controls .previous');
  var $nextButton = $('.main-controls .next');
  var currentSongFromAlbum = null;
+ var currentSoundFile = null;
+ var currentVolume = 80;
  var currentAlbum = null;
 
  $(document).ready(function() {
