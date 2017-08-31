@@ -159,14 +159,14 @@ var togglePlayFromPlayerBar = function(){
     //currentSoundFile is always null until a song is played.  check to see if a song exists and that its paused..
   if(currentSoundFile.isPaused() === true){
     //change song number cell from playButtonTemplate to pauseButtonTemplate
-    $("song-item-number").html(playButtonTemplate);
+    $(".song-item-number")[0].html(playButtonTemplate);
     //change innerHTML of player bar play button to pause button
     $togglePlayPause.html(playerBarPauseButton);
     //play song
     currentSoundFile.play();
   } else if (currentSoundFile){
     //change song number cell from pauseButtonTemplate to playButtonTemplate
-    $("song-item-number").html(playButtonTemplate);
+    $(".song-item-number")[0].html(playButtonTemplate);
     //change innerHTML of player bar play button to play button
     $togglePlayPause.html(playerBarPlayButton);
     currentSoundFile.pause();
