@@ -119,7 +119,7 @@ var previousSong = function(){
   //save last song number
   var lastSongNumber = currentlyPlayingSongNumber;
   //set new current song
-  setSong(songNumber);
+  setSong(currentSong + 1);
   //updatePlayerBarSong to current song
   updatePlayerBarSong();
   //WHy is this different than the nextSong??
