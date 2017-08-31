@@ -156,18 +156,19 @@ var previousSong = function(){
 };
 
 var togglePlayFromPlayerBar = function(){
-  if(currentSoundFile.isPaused === false || currentSoundFile === /*exists?*/ ){
+    //currentSoundFile is always null until a song is played.  check to see if a song exists and that its paused..
+  if(currentSoundFile.isPaused() === true){
     //change song number cell from playButtonTemplate to pauseButtonTemplate
-    $togglePlayPause.html(pauseButtonTemplate);
+    $("song-item-number").html(playButtonTemplate);
     //change innerHTML of player bar play button to pause button
-    $lastSongNumberCell.html(pauseButtonTemplate);
+    $togglePlayPause.html(playerBarPauseButton);
     //play song
     currentSoundFile.play();
-  } else {
+  } else if (currentSoundFile){
     //change song number cell from pauseButtonTemplate to playButtonTemplate
-    $togglePlayPause.html(playButtonTemplate);
+    $("song-item-number").html(playButtonTemplate);
     //change innerHTML of player bar play button to play button
-    $lastSongNumberCell.html(playButtonTemplate);
+    $togglePlayPause.html(playerBarPlayButton);
     currentSoundFile.pause();
   }
 }
