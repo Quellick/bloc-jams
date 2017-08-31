@@ -48,14 +48,13 @@ var getSongNumberCell = function(number){
        updatePlayerBarSong();
      } else if (currentlyPlayingSongNumber === songNumber) {
                if (currentSoundFile.isPaused()) {
- +                $(this).html(pauseButtonTemplate);
- +                $('.main-controls .play-pause').html(playerBarPauseButton);
- +                currentSoundFile.play();
- +            } else {
- +                $(this).html(playButtonTemplate);
- +                $('.main-controls .play-pause').html(playerBarPlayButton);
- +                currentSoundFile.pause();
- +            }
+                $(this).html(pauseButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPauseButton);
+                currentSoundFile.play();
+            } else {                $(this).html(playButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPlayButton);
+                currentSoundFile.pause();
+             }
      }
     };
 
@@ -118,7 +117,7 @@ var nextSong = function(){
   //save last song number
    var lastSongNumber = currentlyPlayingSongNumber;
   //set new current song
-  setSong(songNumber);
+  setSong(currentSong + 1);
   currentSoundFile.play();
   //updatePlayerBarSong to current song
     updatePlayerBarSong();
@@ -142,7 +141,7 @@ var previousSong = function(){
   //save last song number
   var lastSongNumber = currentlyPlayingSongNumber;
   //set new current song
-  setSong(songNumber);
+  setSong(currentSong + 1);
   currentSoundFile.play();
   //updatePlayerBarSong to current song
   updatePlayerBarSong();
