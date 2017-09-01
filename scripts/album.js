@@ -13,6 +13,30 @@ var setSong = function(songNumber){
      setVolume(currentVolume);
   };
 
+  var setCurrentTimeInPlayerBar = function(currentTime){
+    //set text of element with .current-time class to current time in the song
+    document.querySelector('.current-time').text(currentTime)
+    //add method so current time updates with the song playback
+    updateSeekBarWhileSongPlays()
+  }
+
+  var setTotalTimeInPlayerBar = function(totalTime){
+    //set text of element with .total-time class to the length of the song
+    document.querySelector('.total-time').text(totalTime.length)
+    //add method so the total time is set when a song first plays.
+    updatePlayerBarSong();
+  }
+
+  var filterTimeCode = function(timeInSeconds){
+    //Use parseFloat method to get the seconds in number form
+    parseFloat(timeInSeconds);
+    //store variable for the whole seconds and whole minutes
+    var wholeSeconds = Math.floor()
+    var wholeMinutes = Math.floor()
+    //return the time formatted as X:XX
+    return timeInSeconds
+  }
+
   var seek = function(time) {
        if (currentSoundFile) {
            currentSoundFile.setTime(time);
@@ -57,7 +81,7 @@ var getSongNumberCell = function(number){
        var $volumeThumb = $('.volume .thumb');
        $volumeFill.width(currentVolume + '%');
        $volumeThumb.css({left: currentVolume + '%'});
-       
+
      } else if (currentlyPlayingSongNumber === songNumber) {
              if (currentSoundFile.isPaused()) {
                 $(this).html(pauseButtonTemplate);
