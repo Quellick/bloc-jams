@@ -15,14 +15,14 @@ var setSong = function(songNumber){
 
   var setCurrentTimeInPlayerBar = function(currentTime){
     //set text of element with .current-time class to current time in the song
-    document.querySelector('.current-time').text(currentTime);
+    document.querySelector('.current-time').text('currentAlbum.songs.duration');
     //add method so current time updates with the song playback
     updateSeekBarWhileSongPlays();
   }
 
   var setTotalTimeInPlayerBar = function(totalTime){
     //set text of element with .total-time class to the length of the song
-    document.querySelector('.total-time').text(totalTime.length);
+    document.querySelector('.total-time').text(currentTime.length);
     //add method so the total time is set when a song first plays.
     updatePlayerBarSong();
   }
@@ -31,11 +31,11 @@ var setSong = function(songNumber){
     //Use parseFloat method to get the seconds in number form
     var value = parseFloat(timeInSeconds);
     //store variable for the whole seconds and whole minutes
-    var wholeSeconds = Math.floor('value');
+    var wholeSeconds = Math.floor(value);
     //divide timeInSeconds by 60 to get whole minutes?
-    var wholeMinutes = Math.floor60('value');
+    var wholeMinutes = Math.floor(value);
     //return the time formatted as X:XX
-    return (value[0] + ":" + value[1] + value[2]);
+    return (wholeMinutes + ":" + wholeSeconds);
   }
 
   var seek = function(time) {
